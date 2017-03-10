@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <title>HelloWorld</title>
+  </head>
+  <body>
+      <p>HelloWorld</p>
+      <script src="d3.js" charset="UTF-8"></script>
+      <script>
+         d3.select("body").selectAll("p").text("www.ourd3.js.com");
+         var width = 300;
+         var height = 300;
+         var svg = d3.select("body")
+             .append("svg")
+             .attr("width",width)
+             .attr("height",height);
+
+          var dataset = [2.50,2.10,1.70,1.30,0.90];
+          console.log(d3);
+
+          var linear2 = d3.scaleLinear()
+                .domain([0,d3.max(dataset)])
+                .range([0,250]);
+
+          var axis = d3.axisBottom(linear2).ticks(7);
+
+          var rectHright = 25;
+          svg.selectAll("rect")
+               .data(dataset)
+               .enter()
+               .append("rect")
+               .attr("x",20)
+               .attr("y",function(d,i){
+                   return i* rectHright;
+               })
+               .attr("width",function(d){
+                   return linear2(d);
+               })
+               .attr("height",rectHright-2)
+               .attr("fill","steelblue");
+            svg.append("g").call(axis);
+      </script>
+      <svg>
+          <rect></rect>
+          <rect></rect>
+          <g>
+              <!-- 第一个刻度 -->
+              <g> <!-- 分组元素 -->
+                  <line></line>
+                  <text></text>
+              </g>
+              <!-- 第二个刻度 -->
+              <g>
+                  <line></line>
+                  <text></text>
+              </g>
+              <!-- 坐标轴轴线 -->
+              <path></path>
+          </g>
+      </svg>
+  </body>
+</html>
+  
